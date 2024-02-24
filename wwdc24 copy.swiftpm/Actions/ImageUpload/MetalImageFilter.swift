@@ -1,5 +1,5 @@
 import MetalKit
-
+/*
 class MetalImageFilter {
     private let device: MTLDevice
     private let library: MTLLibrary
@@ -119,3 +119,4 @@ class MetalImageFilter {
             return UIImage(cgImage: cgImage)
         }
 }
+*/

@@ -58,6 +58,7 @@ struct ImageUploadView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
+            /*    if #available(iOS 17, *) {
             }
             
             Button {
