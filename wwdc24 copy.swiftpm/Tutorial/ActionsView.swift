@@ -30,13 +30,13 @@ struct ActionsView: View {
             
             CustomButton(
                 title: "Use live camera",
-                destinationView: ImageUploadView()
+                destinationView: LiveCameraView()
             ).padding(.horizontal)
                 .padding(.top)
             
             CustomText(
                 text: "To use live camera you need to be using a physical device.",
-                textSize: 16
+                textSize: 14
             )
             .padding()
             .navigationBarBackButtonHidden(true)

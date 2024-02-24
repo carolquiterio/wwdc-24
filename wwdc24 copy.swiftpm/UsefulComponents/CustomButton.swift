@@ -30,7 +30,7 @@ struct CustomButton<Destination: View>: View {
                     .stroke(Color.black, lineWidth: 2)
                     .offset(x: -6, y: 10)
             )
-        }
+        }.buttonStyle(PlainButtonStyle())
     }
 }
 
