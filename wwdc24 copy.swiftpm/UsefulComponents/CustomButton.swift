@@ -42,11 +42,11 @@ struct CustomButtonWithAction: View {
     var body: some View {
         Button(action: action) {
                 HStack { 
-                    CustomText(
+                    CustomBoldText(
                         text: title,
                         textSize: 20,
                         color: .white
-                    ).bold()
+                    )
                     
                 }
                 .frame(maxWidth: .infinity, maxHeight: 30)
