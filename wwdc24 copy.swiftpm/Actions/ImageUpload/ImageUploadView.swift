@@ -59,6 +59,13 @@ struct ImageUploadView: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
             /*    if #available(iOS 17, *) {
+                    Image(uiImage: filteredImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 200).colorEffect(ShaderLibrary.addLayers(.boundingRect))
+                } */
+                
+                
             }
             
             Button {
@@ -78,8 +85,13 @@ struct ImageUploadView: View {
                 title:  "Apply the machine",
                 action: {
                     if let image = selectedImage {
-                        filteredImage = MetalImageFilter()?.applyFilter(to: image)
-                    }
+                                           filteredImage = MetalImageFilter()?.applyFilter(to: image)
+                                       }
+                    
+                  /*  if let image = selectedImage {
+                        filteredImage = selectedImage
+                    }*/
+                    
                 })
             .padding()
             .navigationBarBackButtonHidden()
