@@ -42,9 +42,6 @@ struct ImageUploadView: View {
     
     var body: some View {
         VStack {
-            CustomBackButton() {
-                dismiss()
-            }
             Spacer()
             if let selectedImage = selectedImage {
                 Image(uiImage: selectedImage)

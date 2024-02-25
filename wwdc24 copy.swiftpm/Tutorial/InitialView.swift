@@ -16,13 +16,14 @@ struct InitialView: View {
             VStack (alignment: .center, content: {
                 HStack {
                     Spacer()
-                    Image(systemName: "questionmark.circle")
-                        .foregroundColor(Colors.primary)
-                        .onTapGesture {
+                    NavigationLink(destination: CreditsView()) {
+                        Image(systemName: "questionmark.circle")
+                            .foregroundColor(Colors.primary)
                             
-                        }
-                        .font(.system(size: 24, weight: .bold))
+                            .font(.system(size: 24, weight: .medium))
+                    }
                 }.padding()
+                    .padding(.top, 24)
                 
                 CustomBoldText(text: "Welcome to Shapping", textSize: 40)
                     .padding()

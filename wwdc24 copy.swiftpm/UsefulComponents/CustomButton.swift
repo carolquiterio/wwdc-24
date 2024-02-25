@@ -25,11 +25,6 @@ struct CustomButton<Destination: View>: View {
             .padding()
             .background(Colors.primary)
             .cornerRadius(40)
-            .background(
-                RoundedRectangle(cornerRadius: 40)
-                    .stroke(Color.black, lineWidth: 2)
-                    .offset(x: -6, y: 10)
-            )
         }.buttonStyle(PlainButtonStyle())
     }
 }
@@ -53,11 +48,6 @@ struct CustomButtonWithAction: View {
                 .padding()
                 .background(Colors.primary)
                 .cornerRadius(40)
-                .background(
-                    RoundedRectangle(cornerRadius: 40)
-                        .stroke(Color.black, lineWidth: 2)
-                        .offset(x: -6, y: 10)
-                )
         }
     }
 }

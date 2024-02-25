@@ -7,6 +7,7 @@ struct MyApp: App {
             NavigationView {
                 ContentView()
             }
+            .accentColor(Colors.primary)
             .navigationViewStyle(.stack)
         }
     }

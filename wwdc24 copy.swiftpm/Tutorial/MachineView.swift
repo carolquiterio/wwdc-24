@@ -12,17 +12,13 @@ struct MachineView: View {
     
     var body: some View {
         VStack {
-            CustomBackButton(
-            action: {
-                dismiss()
-            })
-            CustomText(
+            CustomBoldText(
                 text: "PLOFT, PLOFT, POW....",
                 textSize: 24
-            ).bold()
+            )
             .padding(.top)
             CustomText(
-                text: "The ColorShaping machine is ready!",
+                text: "The ColorShaping machine is ready! Here, the green is represented by triangles and red by circles.",
                 textSize: 16
             )
                 .padding()
@@ -30,6 +26,7 @@ struct MachineView: View {
             Spacer()
             
             AnimatedImageView(imageNames: generateImageNames(startIndex: 8, endIndex: 37, name: "MachineAnimation"), frameCount: 30, frameDuration: 0.2)
+                .frame(maxWidth: 340)
             
             Spacer()
             
@@ -41,7 +38,7 @@ struct MachineView: View {
                 title: "Try the machine",
                 destinationView: ActionsView()
             ).padding()
-            .navigationBarBackButtonHidden(true)
+
         }.background(.white)
     }
 }
