@@ -21,12 +21,12 @@ struct CustomButton<Destination: View>: View {
                     color: .white
                 )
             }
-            .frame(maxWidth: .infinity, maxHeight: 30)
+            .frame(maxWidth: 285, maxHeight: 30)
             .padding()
             .background(Colors.primary)
-            .cornerRadius(16)
+            .cornerRadius(40)
             .background(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 40)
                     .stroke(Color.black, lineWidth: 2)
                     .offset(x: -6, y: 10)
             )
@@ -49,12 +49,12 @@ struct CustomButtonWithAction: View {
                     )
                     
                 }
-                .frame(maxWidth: .infinity, maxHeight: 30)
+                .frame(maxWidth: 285, maxHeight: 30)
                 .padding()
                 .background(Colors.primary)
-                .cornerRadius(16)
+                .cornerRadius(40)
                 .background(
-                    RoundedRectangle(cornerRadius: 16)
+                    RoundedRectangle(cornerRadius: 40)
                         .stroke(Color.black, lineWidth: 2)
                         .offset(x: -6, y: 10)
                 )

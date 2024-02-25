@@ -29,7 +29,7 @@ struct MachineView: View {
             
             Spacer()
             
-            AnimatedImageView(imageNames: generateImageNames(startIndex: 8, endIndex: 37), frameCount: 30, frameDuration: 0.2)
+            AnimatedImageView(imageNames: generateImageNames(startIndex: 8, endIndex: 37, name: "MachineAnimation"), frameCount: 30, frameDuration: 0.2)
             
             Spacer()
             
@@ -43,14 +43,6 @@ struct MachineView: View {
             ).padding()
             .navigationBarBackButtonHidden(true)
         }.background(.white)
-    }
-    
-    func generateImageNames(startIndex: Int, endIndex: Int) -> [String] {
-        var imageNames = [String]()
-        for i in startIndex...endIndex {
-            imageNames.append("MachineAnimation\(i)")
-        }
-        return imageNames
     }
 }
 

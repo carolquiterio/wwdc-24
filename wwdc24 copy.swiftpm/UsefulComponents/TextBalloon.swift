@@ -22,7 +22,6 @@ struct TextBalloon: View {
                     content: {
                         CustomText(text: text, textSize: 16)
                             .padding(.horizontal, 24)
-                        
                     }
                 )
                 

@@ -30,10 +30,9 @@ struct CustomBoldText: View {
     
     var body: some View {
         Text(text)
-            .font(.custom("Poppins-Regular", size: textSize))
+            .font(.custom("Poppins-SemiBold", size: textSize))
             .foregroundColor(color)
             .padding(.horizontal, padding)
             .multilineTextAlignment(.center)
-            .fontWeight(.bold)
         }
 }

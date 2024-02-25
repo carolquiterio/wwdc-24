@@ -55,23 +55,6 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
     float4 color = float4(tex2d.sample(textureSampler, vertex_data.text_coord));
     
     if (isGreen(color)) {
-
-        float circleRadius = 0.02;
-        float spacing = 0.02;
-
-        float2 pattern = floor(uv / (circleRadius * 2.0 + spacing));
-
-        float2 relativePosition = uv - pattern * (circleRadius * 2.0 + spacing);
-
-        float distanceToCenter = length(relativePosition - circleRadius);
-
-        if (distanceToCenter <= circleRadius) {
-            color = float4(0.0, 0.0, 0.0, 1.0);
-        }
-        return color;
-        
-    } else if(isRed(color)) {
-
         float triangleSize = 0.04;
         float spacing = 0.02;
 
@@ -85,6 +68,22 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
             if (relativePosition.x > halfBase && relativePosition.x < triangleSize - halfBase) {
                 color = float4(0.0, 0.0, 0.0, 1.0);
             }
+        }
+        return color;
+    } else if(isRed(color)) {
+
+        
+        float circleRadius = 0.02;
+        float spacing = 0.02;
+
+        float2 pattern = floor(uv / (circleRadius * 2.0 + spacing));
+
+        float2 relativePosition = uv - pattern * (circleRadius * 2.0 + spacing);
+
+        float distanceToCenter = length(relativePosition - circleRadius);
+
+        if (distanceToCenter <= circleRadius) {
+            color = float4(0.0, 0.0, 0.0, 1.0);
         }
         return color;
     }

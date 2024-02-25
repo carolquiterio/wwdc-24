@@ -18,7 +18,6 @@ struct AnimatedImageView: View {
         Image(imageNames[currentFrame])
             .resizable()
             .scaledToFit()
-            .frame(maxWidth: 329)
             .onAppear {
                 let timer = Timer.scheduledTimer(withTimeInterval: frameDuration, repeats: true) { _ in
                     currentFrame = (currentFrame + 1) % frameCount

@@ -7,26 +7,38 @@
 
 import SwiftUI
 
-struct InitialView<Destination: View>: View {
-    let destination: Destination
+struct InitialView: View {
     
     var body: some View {
-        VStack {
-            Spacer()
-            TextBalloon(text: "Hey! HEEEY! Over here! Nice to meet you! My name is Green, and this is Red. We're here to talk to you about color blindness!", invertBalloon: false)
-                .frame(maxWidth: 380)
-            
-            Image("Shapes")
-                .resizable()
+        ZStack {
+            AnimatedImageView(imageNames: generateImageNames(startIndex: 1, endIndex: 6, name: "WelcomeAnimation"), frameCount: 6, frameDuration: 0.2)
                 .scaledToFill()
-                .frame(maxHeight: 380)
-            Spacer()
-            CustomButton(
-                title: "Start",
-                destinationView: destination
-            )
-            .navigationBarBackButtonHidden(true)
-            .padding()
-        }.background(.white)
+            VStack (alignment: .center, content: {
+                HStack {
+                    Spacer()
+                    Image(systemName: "questionmark.circle")
+                        .foregroundColor(Colors.primary)
+                        .onTapGesture {
+                            
+                        }
+                        .font(.system(size: 24, weight: .bold))
+                }.padding()
+                
+                CustomBoldText(text: "Welcome to Shapping", textSize: 40)
+                    .padding()
+                Spacer()
+                
+                CustomButton(
+                    title: "Start",
+                    destinationView: TutorialView()
+                ).padding()
+                 .padding(.bottom, 36)
+            }).padding()
+                .navigationBarBackButtonHidden()
+        }
     }
+}
+
+#Preview {
+    InitialView()
 }
