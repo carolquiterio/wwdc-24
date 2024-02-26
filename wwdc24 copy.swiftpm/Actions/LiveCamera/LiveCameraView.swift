@@ -39,7 +39,8 @@ struct LiveCameraView: View {
                 .padding()
             }
             
-        }.navigationBarTitleDisplayMode(.inline)
+        }.background(.white)
+            .navigationBarTitleDisplayMode(.inline)
             .navigationTitle("Camera")
         .onAppear {
             checkCameraAuthorization()

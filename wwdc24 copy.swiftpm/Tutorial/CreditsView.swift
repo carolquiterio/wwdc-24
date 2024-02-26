@@ -11,7 +11,7 @@ struct CreditsView: View {
     var body: some View {
         VStack(spacing: 10) {
             Spacer()
-            CustomBoldText(text: "History", textSize: 16)
+            CustomBoldText(text: "História", textSize: 16)
             CustomText(text: "Shaping integrates accessibility, technology, and iOS to help individuals, like my grandmother, in distinguishing colors.", textSize: 16).padding(.bottom)
             
             CustomBoldText(text: "Autor", textSize: 16)
