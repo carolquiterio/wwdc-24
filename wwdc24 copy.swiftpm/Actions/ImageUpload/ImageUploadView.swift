@@ -46,19 +46,16 @@ struct ImageUploadView: View {
             if #available(iOS 17, *) {
                 VStack {
                     CustomText(text: "Select an image below or use the + button the add an image from your photo galery.", textSize: 16)
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack (spacing: 12) {
-                            ForEach(0..<imageNames.count, id: \.self) { index in
-                                Button(action : {
-                                    selectedImage = UIImage(named: imageNames[index] )
-                                }) {
-                                    Image(imageNames[index])
-                                        .resizable()
-                                        .scaledToFit()
-                                        .tag(index)
-                                        .cornerRadius(6)
-                                }
+                    HStack (spacing: 6) {
+                        ForEach(0..<imageNames.count, id: \.self) { index in
+                            Button(action : {
+                                selectedImage = UIImage(named: imageNames[index] )
+                            }) {
+                                Image(imageNames[index])
+                                    .resizable()
+                                    .scaledToFit()
+                                    .tag(index)
+                                    .cornerRadius(3)
                             }
                         }
                     }.frame(maxHeight: 100)
@@ -69,6 +66,7 @@ struct ImageUploadView: View {
                     Image(uiImage: filteredImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .cornerRadius(4)
                         .frame(height: 400).colorEffect(ShaderLibrary.addShapes(.boundingRect))
                 }
                 Spacer()
@@ -93,24 +91,25 @@ struct ImageUploadView: View {
                     .cornerRadius(40)
                     
                 }.disabled(selectedImage == nil)
-                .padding()
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Images")
-                .navigationBarItems(trailing : Image(systemName: "plus")
-                    .foregroundColor(Colors.primary)
-                                    
-                    .font(.system(size: 20)).onTapGesture {
-                        isShowingImagePicker = true
-                    }).sheet(isPresented: $isShowingImagePicker) {
-                        ImagePicker(selectedImage: $selectedImage)
-                    }
-                    
+                    .padding()
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("Images")
+                    .navigationBarItems(trailing : Image(systemName: "plus")
+                        .foregroundColor(Colors.primary)
+                                        
+                        .font(.system(size: 20)).onTapGesture {
+                            isShowingImagePicker = true
+                        }).sheet(isPresented: $isShowingImagePicker) {
+                            ImagePicker(selectedImage: $selectedImage)
+                        }
+                
             }
             else {
                 Spacer()
                 CustomText(text: "You need to be in iOS 17 use this feature.", textSize: 16).padding()
                 Spacer()
                     .navigationTitle("Images")
+                    .navigationBarTitleDisplayMode(.inline)
             }
         }.background(.white)
     }
