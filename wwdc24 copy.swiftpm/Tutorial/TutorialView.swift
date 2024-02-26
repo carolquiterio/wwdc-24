@@ -59,30 +59,31 @@ struct TutorialView: View {
                     .padding(.horizontal)
                 Spacer()
                 HStack {
-                    Group {
+                    Button(action: {
+                        backIndice()
+                    }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(Colors.primary)
                         
-                        CustomText(text: "Back", textSize: 20, color: Colors.primary)
-                    }.onTapGesture {
-                        backIndice()
+                        CustomText(text: "Back", textSize: 18, color: Colors.primary)
                     }
                     
                     Spacer()
                     
-                    Group {
-                        CustomBoldText(text: "Next", textSize: 20, color: Colors.primary)
+                    Button(action: {
+                        nextIndice()
+                    }) {
+                        CustomBoldText(text: "Next", textSize: 18, color: Colors.primary)
                         Image(systemName: "chevron.right")
                             .foregroundColor(Colors.primary)
                             .fontWeight(.bold)
-                    }.onTapGesture {
-                        nextIndice()
                     }
                 }.padding(.horizontal)
                     .padding(.bottom, 4)
                 
                     .navigationBarBackButtonHidden(true)
             }.padding()
+                .background(.white)
         }
         else {
             ZStack {
@@ -103,39 +104,38 @@ struct TutorialView: View {
                 VStack(alignment: .center) {
                     Spacer()
                     HStack {
-                        Group {
-                            Image(systemName: "chevron.left")
-                                .foregroundColor(Colors.primary)
-                            
-                            CustomText(text: "Back", textSize: 20, color: Colors.primary)
-                        }.onTapGesture {
+                        Button(action: {
                             if(currentTutorialIndex == 0) {
                                 dismiss()
                             } else {
                                 backIndice()
                             }
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(Colors.primary)
+                            
+                            CustomText(text: "Back", textSize: 18, color: Colors.primary)
                         }
                         
                         Spacer()
                         
-                        if(currentTutorialIndex >= 8) {
+                        if(currentTutorialIndex >= 9) {
                             NavigationLink(destination:
                                             MachineView())
                             {
-                                CustomBoldText(text: "Machine", textSize: 20, color: Colors.primary)
+                                CustomBoldText(text: "Machine", textSize: 18, color: Colors.primary)
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(Colors.primary)
                                     .fontWeight(.bold)
-                            }
+                            }.buttonStyle(.plain)
                         } else {
-                            Group {
-                                CustomBoldText(text: "Next", textSize: 20, color: Colors.primary)
+                            Button(action: {
+                                nextIndice()
+                            }) {
+                                CustomBoldText(text: "Next", textSize: 18, color: Colors.primary)
                                 Image(systemName: "chevron.right")
                                     .foregroundColor(Colors.primary)
                                     .fontWeight(.bold)
-                                
-                            }.onTapGesture {
-                                nextIndice()
                             }
                         }
                         

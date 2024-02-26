@@ -16,10 +16,6 @@ struct LiveCameraView: View {
     
     var body: some View {
         VStack {
-            //        CustomBackButton() {
-            //            dismiss()
-            //        }
-            
             if(isCameraAccessGranted) {
                 if let viewModel = viewModel, let operation = viewModel.operationChain {
                     VideoPreview(operation: operation)
@@ -43,7 +39,9 @@ struct LiveCameraView: View {
                 .padding()
             }
             
-        }.onAppear {
+        }.navigationBarTitleDisplayMode(.inline)
+            .navigationTitle("Camera")
+        .onAppear {
             checkCameraAuthorization()
             if(isCameraAccessGranted) {
                 viewModel = LiveCameraViewModel()

@@ -39,7 +39,7 @@ bool isRed(float4 color) {
 }
 
 bool isGreen(float4 color) {
-     if (color[1] > (color[0] + 0.2) && color[1] > (color[2])) {
+     if (color[1] > (color[0] + 0.1) && color[1] > (color[2])) {
         return true;
     } else {
         return false;
@@ -91,3 +91,42 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
     return color;
 }
 
+[[ stitchable ]] half4 addShapes(float2 position, half4 currentColor, float4 bounds) {
+    float4 color = float4(currentColor.r, currentColor.g, currentColor.b, 1.0);
+    
+   if (isGreen(color)) {
+        float triangleSize = 0.04;
+        float spacing = 0.02;
+
+        float2 pattern = floor(position / (triangleSize + spacing));
+
+        float2 relativePosition = position - pattern * (triangleSize + spacing);
+
+        float halfHeight = triangleSize * sqrt(3.0) / 2.0;
+        half4 newColor = currentColor;
+        if (relativePosition.y < halfHeight) {
+            float halfBase = (triangleSize / 2.0) * (halfHeight - relativePosition.y) / halfHeight;
+            if (relativePosition.x > halfBase && relativePosition.x < triangleSize - halfBase) {
+                newColor = half4(0.0, 0.0, 0.0, 1.0);
+            }
+        }
+        return newColor;
+        
+    } else if (isRed(color)) {
+        float circleRadius = 0.02;
+        float spacing = 0.02;
+
+        float2 pattern = floor(position / (circleRadius * 2.0 + spacing));
+
+        float2 relativePosition = position - pattern * (circleRadius * 2.0 + spacing);
+        
+        half4 newColor = currentColor;
+        float distanceToCenter = length(relativePosition - circleRadius);
+        if (distanceToCenter <= circleRadius) {
+            newColor = half4(0.0, 0.0, 0.0, 1.0);
+        }
+        return newColor;
+        
+    }
+    return currentColor;
+}

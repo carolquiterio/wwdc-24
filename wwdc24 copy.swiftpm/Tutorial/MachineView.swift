@@ -18,7 +18,7 @@ struct MachineView: View {
             )
             .padding(.top)
             CustomText(
-                text: "The ColorShaping machine is ready! Here, the green is represented by triangles and red by circles.",
+                text: "The ColorShaping machine is ready! Here, all tones of red - like pink and orange - are represented by circles and green by triangles.",
                 textSize: 16
             )
                 .padding()

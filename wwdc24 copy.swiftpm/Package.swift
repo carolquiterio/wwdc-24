@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "UnblindMe",
+    name: "Shaping",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "UnblindMe",
+            name: "Shaping",
             targets: ["AppModule"],
             bundleIdentifier: "carolina.quiterio.wwdc24",
             teamIdentifier: "Q42NF3HR3Y",

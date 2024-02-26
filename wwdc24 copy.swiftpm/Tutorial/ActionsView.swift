@@ -13,13 +13,14 @@ struct ActionsView: View {
             AnimatedImageView(imageNames: generateImageNames(startIndex: 8, endIndex: 37, name: "MachineAnimation"), frameCount: 30, frameDuration: 0.2)
                 .frame(maxWidth: 200)
                 .padding(.top, 100)
-            
-            CustomBoldText(
-                text: "Use images",
-                textSize: 18,
-                color: Colors.primary
-            ).padding(.horizontal)
-                .padding(.top, 36)
+            NavigationLink(destination: ImageUploadView()) {
+                CustomBoldText(
+                    text: "Use images",
+                    textSize: 18,
+                    color: Colors.primary
+                ).padding(.horizontal)
+                    .padding(.top, 36)
+            }.buttonStyle(.plain)
             
             CustomText(
                 text: "or",
@@ -38,16 +39,18 @@ struct ActionsView: View {
             .padding(.horizontal)
             .navigationBarItems(
                 trailing: NavigationLink(
-                    destination: InitialView()) {
+                    destination: ThankYouView()) {
                         CustomBoldText(text: "Finish", textSize: 18, color: Colors.primary
-                                                               
-                                                )
-                                            }
+                                       
+                        )
+                    }
             )
             
+            Spacer()
         }.background(.white)
+            .padding()
+            
         
-        Spacer().background(.white)
     }
 }
 

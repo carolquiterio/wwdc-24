@@ -13,6 +13,7 @@ struct InitialView: View {
         ZStack {
             AnimatedImageView(imageNames: generateImageNames(startIndex: 1, endIndex: 6, name: "WelcomeAnimation"), frameCount: 6, frameDuration: 0.2)
                 .scaledToFill()
+                .background(.white)
             VStack (alignment: .center, content: {
                 HStack {
                     Spacer()
@@ -25,7 +26,7 @@ struct InitialView: View {
                 }.padding()
                     .padding(.top, 24)
                 
-                CustomBoldText(text: "Welcome to Shapping", textSize: 40)
+                CustomBoldText(text: "Welcome to Shaping", textSize: 40)
                     .padding()
                 Spacer()
                 
@@ -36,6 +37,7 @@ struct InitialView: View {
                  .padding(.bottom, 36)
             }).padding()
                 .navigationBarBackButtonHidden()
+                
         }
     }
 }

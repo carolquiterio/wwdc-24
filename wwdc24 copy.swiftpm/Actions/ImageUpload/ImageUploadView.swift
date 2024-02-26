@@ -34,65 +34,86 @@ struct ImagePicker: UIViewControllerRepresentable {
 }
 
 struct ImageUploadView: View {
-    @Environment(\.dismiss) private var dismiss
     
-    @State private var selectedImage: UIImage?
+    @State private var selectedImage: UIImage? = nil
     @State private var isShowingImagePicker = false
     @State private var filteredImage: UIImage?
+    @State private var selectedImageIndex = 0
+    let imageNames = ["ExampleImage1", "ExampleImage2", "ExampleImage3", "Semaphore", "ExampleImage4", "ExampleImage5", "ExampleImage6"]
     
     var body: some View {
         VStack {
-            Spacer()
-            if let selectedImage = selectedImage {
-                Image(uiImage: selectedImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-            }
-            
-            if let filteredImage = filteredImage {
-                Image(uiImage: filteredImage)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-            /*    if #available(iOS 17, *) {
+            if #available(iOS 17, *) {
+                
+                CustomText(text: "Select an image below or use the + button the add an image from your photo galery.", textSize: 16)
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack (spacing: 12) {
+                        ForEach(0..<imageNames.count, id: \.self) { index in
+                            Button(action : {
+                                selectedImage = UIImage(named: imageNames[index] )
+                            }) {
+                                Image(imageNames[index])
+                                    .resizable()
+                                    .scaledToFit()
+                                    .tag(index)
+                                    .cornerRadius(6)
+                            }
+                        }
+                    }
+                }.frame(maxHeight: 100)
+                    .padding()
+                Spacer()
+                if let filteredImage = filteredImage {
                     Image(uiImage: filteredImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: 200).colorEffect(ShaderLibrary.addLayers(.boundingRect))
-                } */
+                        .frame(height: 400).colorEffect(ShaderLibrary.addShapes(.boundingRect))
+                }
+                Spacer()
                 
-                
-            }
-            
-            Button {
-                isShowingImagePicker = true
-            } label: {
-                CustomText(
-                    text: "Select an image",
-                    textSize: 16,
-                    color: Colors.primary
-                ).bold()
-            }
-            .sheet(isPresented: $isShowingImagePicker) {
-                ImagePicker(selectedImage: $selectedImage)
-            }
-            
-            CustomButtonWithAction(
-                title:  "Apply the machine",
-                action: {
+                Button(action: {
                     if let image = selectedImage {
-                                           filteredImage = MetalImageFilter()?.applyFilter(to: image)
-                                       }
-                    
-                  /*  if let image = selectedImage {
-                        filteredImage = selectedImage
-                    }*/
-                    
-                })
-            .padding()
-            .navigationBarBackButtonHidden()
-            Spacer()
+                        filteredImage = image
+                    } else if(selectedImageIndex != 0) {
+                        filteredImage = UIImage( named:  imageNames[selectedImageIndex])
+                    }
+                }) {
+                    HStack {
+                        CustomBoldText(
+                            text: "Apply the machine",
+                            textSize: 18,
+                            color: .white
+                        )
+                        
+                    }
+                    .frame(maxWidth: 285, maxHeight: 30)
+                    .padding()
+                    .background(Colors.primary)
+                    .cornerRadius(40)
+                    .disabled(selectedImage != nil)
+                }
+                .padding()
+                .navigationBarItems(trailing : Image(systemName: "plus")
+                    .foregroundColor(Colors.primary)
+                                    
+                    .font(.system(size: 20)).onTapGesture {
+                        isShowingImagePicker = true
+                    }).sheet(isPresented: $isShowingImagePicker) {
+                        ImagePicker(selectedImage: $selectedImage)
+                    }
+                    .navigationTitle("Images")
+            }
+            else {
+                Spacer()
+                CustomText(text: "You need to be in iOS 17 use this feature.", textSize: 16).padding()
+                Spacer()
+                    .navigationTitle("Images")
+            }
         }.background(.white)
     }
+}
+
+#Preview {
+    ImageUploadView()
 }

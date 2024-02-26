@@ -17,7 +17,7 @@ struct CustomButton<Destination: View>: View {
             HStack {
                 CustomBoldText(
                     text: title,
-                    textSize: 20,
+                    textSize: 18,
                     color: .white
                 )
             }
@@ -39,7 +39,7 @@ struct CustomButtonWithAction: View {
                 HStack { 
                     CustomBoldText(
                         text: title,
-                        textSize: 20,
+                        textSize: 18,
                         color: .white
                     )
                     
