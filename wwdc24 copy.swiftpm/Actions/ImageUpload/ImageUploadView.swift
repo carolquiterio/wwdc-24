@@ -44,25 +44,26 @@ struct ImageUploadView: View {
     var body: some View {
         VStack {
             if #available(iOS 17, *) {
-                
-                CustomText(text: "Select an image below or use the + button the add an image from your photo galery.", textSize: 16)
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack (spacing: 12) {
-                        ForEach(0..<imageNames.count, id: \.self) { index in
-                            Button(action : {
-                                selectedImage = UIImage(named: imageNames[index] )
-                            }) {
-                                Image(imageNames[index])
-                                    .resizable()
-                                    .scaledToFit()
-                                    .tag(index)
-                                    .cornerRadius(6)
+                VStack {
+                    CustomText(text: "Select an image below or use the + button the add an image from your photo galery.", textSize: 16)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack (spacing: 12) {
+                            ForEach(0..<imageNames.count, id: \.self) { index in
+                                Button(action : {
+                                    selectedImage = UIImage(named: imageNames[index] )
+                                }) {
+                                    Image(imageNames[index])
+                                        .resizable()
+                                        .scaledToFit()
+                                        .tag(index)
+                                        .cornerRadius(6)
+                                }
                             }
                         }
-                    }
-                }.frame(maxHeight: 100)
-                    .padding()
+                    }.frame(maxHeight: 100)
+                        .padding().scrollDisabled(false)
+                }
                 Spacer()
                 if let filteredImage = filteredImage {
                     Image(uiImage: filteredImage)
@@ -85,15 +86,16 @@ struct ImageUploadView: View {
                             textSize: 18,
                             color: .white
                         )
-                        
                     }
                     .frame(maxWidth: 285, maxHeight: 30)
                     .padding()
-                    .background(Colors.primary)
+                    .background(selectedImage != nil ? Colors.primary : Color.clear)
                     .cornerRadius(40)
-                    .disabled(selectedImage != nil)
-                }
+                    
+                }.disabled(selectedImage == nil)
                 .padding()
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Images")
                 .navigationBarItems(trailing : Image(systemName: "plus")
                     .foregroundColor(Colors.primary)
                                     
@@ -102,7 +104,7 @@ struct ImageUploadView: View {
                     }).sheet(isPresented: $isShowingImagePicker) {
                         ImagePicker(selectedImage: $selectedImage)
                     }
-                    .navigationTitle("Images")
+                    
             }
             else {
                 Spacer()

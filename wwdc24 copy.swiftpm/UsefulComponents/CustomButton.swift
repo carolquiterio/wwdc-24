@@ -28,26 +28,3 @@ struct CustomButton<Destination: View>: View {
         }.buttonStyle(PlainButtonStyle())
     }
 }
-
-
-struct CustomButtonWithAction: View {
-    let title: String
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-                HStack { 
-                    CustomBoldText(
-                        text: title,
-                        textSize: 18,
-                        color: .white
-                    )
-                    
-                }
-                .frame(maxWidth: 285, maxHeight: 30)
-                .padding()
-                .background(Colors.primary)
-                .cornerRadius(40)
-        }
-    }
-}

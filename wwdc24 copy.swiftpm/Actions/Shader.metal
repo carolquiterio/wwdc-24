@@ -31,7 +31,7 @@ fragment float4 fragment_render_target(Vertex vertex_data [[ stage_in ]],
 
 
 bool isRed(float4 color) {
-    if (color[0] > (color[2] + 0.2) && color[0] > (color[1] + 0.2)) {
+    if (color[0] > (color[2] + 0.2) && color[0] > (color[1] + 0.2) && color[1] < 0.5 && color[2] < 0.5) {
         return true;
     } else {
         return false;
@@ -39,7 +39,7 @@ bool isRed(float4 color) {
 }
 
 bool isGreen(float4 color) {
-     if (color[1] > (color[0] + 0.1) && color[1] > (color[2])) {
+    if (color[1] > (color[0] + 0.1) && color[1] > (color[2]) && color[0] < 0.5 && color[2] < 0.5) {
         return true;
     } else {
         return false;
@@ -47,7 +47,7 @@ bool isGreen(float4 color) {
 }
 
 fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage_in ]],
-                                            texture2d<float> tex2d [[ texture(0) ]])
+                                                     texture2d<float> tex2d [[ texture(0) ]])
 {
     constexpr sampler textureSampler(mag_filter::linear, min_filter::linear);
     
@@ -57,11 +57,11 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
     if (isGreen(color)) {
         float triangleSize = 0.04;
         float spacing = 0.02;
-
+        
         float2 pattern = floor(uv / (triangleSize + spacing));
-
+        
         float2 relativePosition = uv - pattern * (triangleSize + spacing);
-
+        
         float halfHeight = triangleSize * sqrt(3.0) / 2.0;
         if (relativePosition.y < halfHeight) {
             float halfBase = (triangleSize / 2.0) * (halfHeight - relativePosition.y) / halfHeight;
@@ -71,17 +71,17 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
         }
         return color;
     } else if(isRed(color)) {
-
+        
         
         float circleRadius = 0.02;
         float spacing = 0.02;
-
+        
         float2 pattern = floor(uv / (circleRadius * 2.0 + spacing));
-
+        
         float2 relativePosition = uv - pattern * (circleRadius * 2.0 + spacing);
-
+        
         float distanceToCenter = length(relativePosition - circleRadius);
-
+        
         if (distanceToCenter <= circleRadius) {
             color = float4(0.0, 0.0, 0.0, 1.0);
         }
@@ -92,16 +92,18 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
 }
 
 [[ stitchable ]] half4 addShapes(float2 position, half4 currentColor, float4 bounds) {
-    float4 color = float4(currentColor.r, currentColor.g, currentColor.b, 1.0);
     
-   if (isGreen(color)) {
+    float4 color = float4(currentColor.r, currentColor.g, currentColor.b, 1.0);
+    float2 uv = position.xy / bounds.zw;
+    
+    if (isGreen(color)) {
         float triangleSize = 0.04;
         float spacing = 0.02;
-
-        float2 pattern = floor(position / (triangleSize + spacing));
-
-        float2 relativePosition = position - pattern * (triangleSize + spacing);
-
+        
+        float2 pattern = floor(uv / (triangleSize + spacing));
+        
+        float2 relativePosition = uv - pattern * (triangleSize + spacing);
+        
         float halfHeight = triangleSize * sqrt(3.0) / 2.0;
         half4 newColor = currentColor;
         if (relativePosition.y < halfHeight) {
@@ -115,10 +117,10 @@ fragment float4 red_and_green_fragment_render_target(Vertex vertex_data [[ stage
     } else if (isRed(color)) {
         float circleRadius = 0.02;
         float spacing = 0.02;
-
-        float2 pattern = floor(position / (circleRadius * 2.0 + spacing));
-
-        float2 relativePosition = position - pattern * (circleRadius * 2.0 + spacing);
+        
+        float2 pattern = floor(uv / (circleRadius * 2.0 + spacing));
+        
+        float2 relativePosition = uv - pattern * (circleRadius * 2.0 + spacing);
         
         half4 newColor = currentColor;
         float distanceToCenter = length(relativePosition - circleRadius);

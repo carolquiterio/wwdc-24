@@ -47,10 +47,9 @@ struct ActionsView: View {
             )
             
             Spacer()
-        }.background(.white)
-            .padding()
+        }.padding()
+            .background(.white)
             
-        
     }
 }
 
